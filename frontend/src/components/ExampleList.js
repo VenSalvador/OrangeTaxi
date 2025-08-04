@@ -11,7 +11,7 @@ const ExampleList = () => {
   }, []);
 
   return (
-    <div>
+    <div className="container my-5">
       <h2>Example Data</h2>
       <ul>
         {data.map(item => (

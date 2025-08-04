@@ -1,29 +1,16 @@
-// import React from 'react';
-// import ExampleList from './components/ExampleList';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <h1>MERN Stack App</h1>
-//       <ExampleList />
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
 import React from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
+import ExampleList from './components/ExampleList';
 
 const App = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="d-flex flex-column min-vh-100">
       <Header />
-      <main className="flex-grow container mx-auto p-4">
+      <main className="flex-grow-1 container py-4">
         <HomePage />
+        <ExampleList />
       </main>
       <Footer />
     </div>
