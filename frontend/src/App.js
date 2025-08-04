@@ -1,19 +1,21 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
+import AppRouter from './routes/Router';
 import ExampleList from './components/ExampleList';
 
 const App = () => {
   return (
-    <div className="d-flex flex-column min-vh-100">
-      <Header />
-      <main className="flex-grow-1 container py-4">
-        <HomePage />
-        <ExampleList />
-      </main>
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div className="d-flex flex-column min-vh-100">
+        <Header />
+        <main className="flex-grow-1 container py-4">
+          <AppRouter />
+        </main>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 };
 
