@@ -14,7 +14,7 @@ const Header = () => {
 
     return (
         <header className="bg-light py-3 shadow-sm fixed-top w-100">
-            <div className="container d-flex justify-content-between align-items-center">
+            <div className="d-flex justify-content-between align-items-center px-4">
                 {/* Logo */}
                 <a href="/" className="d-inline-block">
                     <img

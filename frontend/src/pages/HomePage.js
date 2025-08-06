@@ -1,41 +1,20 @@
 import React from 'react';
+import driverImage from '../assets/driver.jpg'; // Make sure the path is correct
 
 const HomePage = () => {
   return (
-    <div className="container my-5">
-      <h2 className="h4 fw-semibold mb-3">Welcome to Orange Taxi</h2>
-      <p className="mb-4">Book your ride quickly and safely.</p>
-      <h1 className="text-danger display-6">Test Text</h1>
-      <h2 className="h4 fw-semibold mb-3">Welcome to Orange Taxi</h2>
-      <p className="mb-4">Book your ride quickly and safely.</p>
-      <h1 className="text-danger display-6">Test Text</h1>
-      <h2 className="h4 fw-semibold mb-3">Welcome to Orange Taxi</h2>
-      <p className="mb-4">Book your ride quickly and safely.</p>
-      <h1 className="text-danger display-6">Test Text</h1>
-      <h2 className="h4 fw-semibold mb-3">Welcome to Orange Taxi</h2>
-      <p className="mb-4">Book your ride quickly and safely.</p>
-      <h1 className="text-danger display-6">Test Text</h1>
-      <h2 className="h4 fw-semibold mb-3">Welcome to Orange Taxi</h2>
-      <p className="mb-4">Book your ride quickly and safely.</p>
-      <h1 className="text-danger display-6">Test Text</h1>
-      <h2 className="h4 fw-semibold mb-3">Welcome to Orange Taxi</h2>
-      <p className="mb-4">Book your ride quickly and safely.</p>
-      <h1 className="text-danger display-6">Test Text</h1>
-      <h2 className="h4 fw-semibold mb-3">Welcome to Orange Taxi</h2>
-      <p className="mb-4">Book your ride quickly and safely.</p>
-      <h1 className="text-danger display-6">Test Text</h1>
-      <h2 className="h4 fw-semibold mb-3">Welcome to Orange Taxi</h2>
-      <p className="mb-4">Book your ride quickly and safely.</p>
-      <h1 className="text-danger display-6">Test Text</h1>
-      <h2 className="h4 fw-semibold mb-3">Welcome to Orange Taxi</h2>
-      <p className="mb-4">Book your ride quickly and safely.</p>
-      <h1 className="text-danger display-6">Test Text</h1>
-      <h2 className="h4 fw-semibold mb-3">Welcome to Orange Taxi</h2>
-      <p className="mb-4">Book your ride quickly and safely.</p>
-      <h1 className="text-danger display-6">Test Text</h1>
-      <h2 className="h4 fw-semibold mb-3">Welcome to Orange Taxi</h2>
-      <p className="mb-4">Book your ride quickly and safely.</p>
-      <h1 className="text-danger display-6">Test Text</h1>
+    <div className="container-fluid p-0 m-0">
+      <img
+        src={driverImage}
+        alt="Driver"
+        className="img-fluid"
+        style={{
+          width: '100vw',
+          height: '100vh',
+          objectFit: 'cover',
+          display: 'block',
+        }}
+      />
     </div>
   );
 };
