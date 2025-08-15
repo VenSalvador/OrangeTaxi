@@ -18,4 +18,21 @@ app.get('/', (req, res) => {
     res.send('Hello from backend');
 });
 
+const UserSchema = new mongoose.Schema({
+  name: String,
+  value: Number
+});
+
+const User = mongoose.model('User', UserSchema);
+
+// API endpoint to get all items
+app.get('/api/users', async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
