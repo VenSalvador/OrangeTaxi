@@ -1,10 +1,14 @@
 import React from "react";
 
-const AuthInput = ({ label, type = "text", value, onChange, placeholder }) => {
+const AuthInput = ({ label, name, type = "text", value, onChange, placeholder }) => {
   return (
     <div className="mb-4">
-      <label className="block text-gray-700 font-semibold mb-2">{label}</label>
+      <label className="block text-gray-700 font-semibold mb-2" htmlFor={name}>
+        {label}
+      </label>
       <input
+        id={name}
+        name={name}
         type={type}
         value={value}
         onChange={onChange}

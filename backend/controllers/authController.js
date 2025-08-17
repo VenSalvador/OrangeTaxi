@@ -64,36 +64,50 @@ export const registerDriver = async (req, res) => {
 
 // ================= Login (Passenger or Driver) =================
 export const login = async (req, res) => {
+  const { email, password } = req.body;
+
   try {
-    const { email, password, role } = req.body; // role = 'passenger' or 'driver'
+    // First check Passenger table
+    let user = await Passenger.findOne({ email });
+    let role = "passenger";
 
-    // Select model based on role
-    const Model = role === "driver" ? Driver : Passenger;
-    const user = await Model.findOne({ email });
-    if (!user) return res.status(404).json({ message: "User not found" });
+    if (!user) {
+      // If not a passenger, check Driver table
+      user = await Driver.findOne({ email });
+      role = "driver";
+    }
 
-    // Check password
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
 
     // Generate JWT
     const token = jwt.sign(
       { id: user._id, role },
-      JWT_SECRET,
-      { expiresIn: "7d" }
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
     );
 
     res.json({
       message: "Login successful",
       token,
+      role,
       user: {
         id: user._id,
         name: user.name,
         email: user.email,
-        role,
+        contactNumber: user.contactNumber,
+        role
       },
     });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error("Login error:", err);
+    res.status(500).json({ message: "Server error" });
   }
 };

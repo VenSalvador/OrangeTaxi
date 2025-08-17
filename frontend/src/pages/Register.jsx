@@ -3,50 +3,57 @@ import { Link } from "react-router-dom";
 import AuthInput from "../components/AuthInput";
 
 const Register = () => {
-  const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    contactNumber: "",
+  });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (form.password !== form.confirmPassword) {
-    alert("Passwords do not match");
-    return;
-  }
-
-  try {
-    const res = await fetch("http://localhost:5000/api/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: form.name,
-        email: form.email,
-        password: form.password,
-        contactNumber: "09123456789", // you can add a field for this later
-      }),
-    });
-
-    const data = await res.json();
-    if (res.ok) {
-      alert("Registration successful!");
-      console.log(data);
-    } else {
-      alert(data.message || "Registration failed");
+    if (form.password !== form.confirmPassword) {
+      alert("Passwords do not match");
+      return;
     }
-  } catch (error) {
-    console.error(error);
-    alert("Something went wrong");
-  }
-};
 
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/registerPassenger", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          password: form.password,
+          contactNumber: form.contactNumber,
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        alert("Registration successful!");
+        console.log(data);
+      } else {
+        alert(data.message || "Registration failed");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
+    }
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-96">
-        <h2 className="text-2xl font-bold text-center mb-6 text-orange-600">Orange Taxi Register</h2>
+        <h2 className="text-2xl font-bold text-center mb-6 text-orange-600">
+          Orange Taxi Register
+        </h2>
         <form onSubmit={handleSubmit}>
           <AuthInput
             label="Full Name"
@@ -62,6 +69,14 @@ const Register = () => {
             value={form.email}
             onChange={handleChange}
             placeholder="Enter your email"
+          />
+          <AuthInput
+            label="Contact Number"
+            type="text"
+            name="contactNumber"
+            value={form.contactNumber}
+            onChange={handleChange}
+            placeholder="Enter your contact number"
           />
           <AuthInput
             label="Password"
