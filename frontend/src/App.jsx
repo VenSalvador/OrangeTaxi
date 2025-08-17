@@ -1,20 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import DatabasePage from './pages/DatabasePage';
+// src/App.jsx
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-function App() {
+// Pages
+import Home from "./pages/HomePage";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import DriverRegister from "./pages/DriverRegister";
+
+// Components
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+
+const App = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 text-white">
-      <h1 className="text-4xl font-bold mb-4">🚀 Tailwind CSS is Working!</h1>
-      <button className="px-6 py-3 bg-white text-blue-500 rounded-lg shadow-lg hover:bg-blue-100 transition">
-        Test Button
-      </button>
-      <DatabasePage />
-    </div>
-    
-  );
-}
+    <Router>
+      <div className="flex flex-col min-h-screen">
+        {/* Navbar always on top */}
+        <Navbar />
 
-export default App
+        {/* Main content area */}
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/driverregister" element={<DriverRegister />} />
+          </Routes>
+        </main>
+
+        {/* Footer always on bottom */}
+        <Footer />
+      </div>
+    </Router>
+  );
+};
+
+export default App;

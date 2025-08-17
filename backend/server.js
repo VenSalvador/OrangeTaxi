@@ -1,38 +1,25 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 5000;
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log('✅ MongoDB connected'))
-    .catch(err => console.error(err));
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI, {
+})
+.then(() => console.log("MongoDB connected"))
+.catch((err) => console.error(err));
 
-app.get('/', (req, res) => {
-    res.send('Hello from backend');
-});
+// Routes
+import authRoutes from "./routes/auth.js";
 
-const UserSchema = new mongoose.Schema({
-  name: String,
-  value: Number
-});
+app.use("/api/auth", authRoutes);
 
-const User = mongoose.model('User', UserSchema);
-
-// API endpoint to get all items
-app.get('/api/users', async (req, res) => {
-  try {
-    const users = await User.find();
-    res.json(users);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
